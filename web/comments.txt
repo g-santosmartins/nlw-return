@@ -1,0 +1,3 @@
+vite substitue o babel
+usa o esmodules ou seja nao 
+precisa do webpack por possuir ja parte
