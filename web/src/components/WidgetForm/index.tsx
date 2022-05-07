@@ -4,12 +4,13 @@ import { useState } from 'react'
 
 import { Popover } from '@headlessui/react'
 import { ChatTeardropDots } from 'phosphor-react'
-import { CloseButton } from './CloseButton'
-import bugImageUrl from '../assets/bug.svg'
-import ideaImageUrl from '../assets/idea.svg'
-import thoughtImageUrl from '../assets/thought.svg'
+import { CloseButton } from '../CloseButton'
+import bugImageUrl from '../../assets/bug.svg'
+import ideaImageUrl from '../../assets/idea.svg'
+import thoughtImageUrl from '../../assets/thought.svg'
+import { FeedbackTypeStep } from './Steps/FeedbackTypeStep'
 
-const feedbackTypes = {
+export const feedbackTypes = {
     BUG: {
         title: 'Problema',
         image: {
@@ -33,11 +34,11 @@ const feedbackTypes = {
     }
 }
 
-type FeedbackType = keyof typeof feedbackTypes
+export type FeedbackType = keyof typeof feedbackTypes
 
 export function WidgetForm() {
 
-    const [feedbackType, setFeedbackType] = useState<FeedbackType | null>(null)
+     const [feedbackType, setFeedbackType] = useState<FeedbackType | null>(null)
 
     return (
         // bringing position, and using cal() inside the tailwind css
@@ -53,27 +54,9 @@ export function WidgetForm() {
                 <CloseButton />
             </header>
             {!feedbackType ? (
-            <div className="flex py-8 gap-2 w-full"
-            >
-                {/* destructiing array */}
-                {Object.entries(feedbackTypes).map(([key, value], index) => {
-
-                    console.log(key, value)
-                    return (
-                        <button
-                            key={index}
-                            className="bg-zinc-800 rounded-lg py-5 w-24 flex-1 flex flex-col items-center gap-2
-                             border-2 border-transparent hover:border-brand-500 focus:border-brand-500 focus:"
-                            onClick={() => {setFeedbackType(key as FeedbackType)}}
-                            type="button"
-
-                        >
-                            <img src={value.image.source} alt={value.image.alt} />
-                            <button>{value.title}</button>
-                        </button>
-                    )
-                })}
-            </div>): (
+                <FeedbackTypeStep onFeedbackTypeChanged={setFeedbackType}/>
+                // feedback type component goes here
+           ): (
                 <p>Hello World</p>
             )}
 
