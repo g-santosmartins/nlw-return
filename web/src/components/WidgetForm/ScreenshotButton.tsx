@@ -1,10 +1,30 @@
+import html2canvas from "html2canvas";
 import { Camera } from "phosphor-react";
+import { useState } from "react";
 
 export function ScreenshotButton () { 
+
+    const [isTakingScreenshot, setIstakingScreenshot] = useState(false)
+
+
+    // waits until it's done with async
+    async function handleTakeScreenshot() {
+        setIstakingScreenshot(true)
+
+        // take a print of the screen using html2canva
+        const canvas = await html2canvas(document.querySelector('html')!)
+
+        // convert it into a base 64 url image output: png
+        const base64image = canvas.toDataURL('image/png')
+
+        console.log(base64image)
+
+        setIstakingScreenshot(false)
+    }
     return (
         <button
         type="button"
-
+        onClick={() => {handleTakeScreenshot()}}
         className="p-2 bg-zinc-800 rounded-md border-transparent hover:bg-zinc-700
         transition-colors focus:outline-none
         focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-900 focus:ring-brand-500"
