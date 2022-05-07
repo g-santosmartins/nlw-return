@@ -1,6 +1,9 @@
 
-import { ChatTeardropDots } from 'phosphor-react'
+import { useState } from 'react'
+
+
 import { Popover } from '@headlessui/react'
+import { ChatTeardropDots } from 'phosphor-react'
 import { CloseButton } from './CloseButton'
 import bugImageUrl from '../assets/bug.svg'
 import ideaImageUrl from '../assets/idea.svg'
@@ -20,7 +23,6 @@ const feedbackTypes = {
             source: ideaImageUrl,
             alt: "Imagem de um lâmpada"
         }
-
     },
     OTHER: {
         title: 'Outro',
@@ -31,9 +33,12 @@ const feedbackTypes = {
     }
 }
 
+type FeedbackType = keyof typeof feedbackTypes
+
 export function WidgetForm() {
 
-    // first day finished
+    const [feedbackType, setFeedbackType] = useState<FeedbackType | null>(null)
+
     return (
         // bringing position, and using cal() inside the tailwind css
         //w-[calc(100vw-2rem)] and with tablets md: wd:w-auto
@@ -47,7 +52,7 @@ export function WidgetForm() {
 
                 <CloseButton />
             </header>
-
+            {!feedbackType ? (
             <div className="flex py-8 gap-2 w-full"
             >
                 {/* destructiing array */}
@@ -59,7 +64,7 @@ export function WidgetForm() {
                             key={index}
                             className="bg-zinc-800 rounded-lg py-5 w-24 flex-1 flex flex-col items-center gap-2
                              border-2 border-transparent hover:border-brand-500 focus:border-brand-500 focus:"
-                            // onClick={}
+                            onClick={() => {setFeedbackType(key as FeedbackType)}}
                             type="button"
 
                         >
@@ -68,7 +73,9 @@ export function WidgetForm() {
                         </button>
                     )
                 })}
-            </div>
+            </div>): (
+                <p>Hello World</p>
+            )}
 
             <footer className='text-xs text-neutral-400'>
                 Feito com ♥ pela <a className='underline underline-offset-2' href='https://rocketseat.com.br'> Rocketseat</a>
