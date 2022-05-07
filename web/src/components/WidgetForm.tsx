@@ -2,18 +2,32 @@
 import { ChatTeardropDots } from 'phosphor-react'
 import { Popover } from '@headlessui/react'
 import { CloseButton } from './CloseButton'
-
+import bugImageUrl from '../assets/bug.svg'
+import ideaImageUrl from '../assets/idea.svg'
+import thoughtImageUrl from '../assets/thought.svg'
 
 const feedbackTypes = {
     BUG: {
-        title: 'Problema'
+        title: 'Problema',
+        image: {
+            source: bugImageUrl,
+            alt: "Imagem de um inseto"
+        }
     },
-    IDEA:  {
-        title: 'Ideia'
+    IDEA: {
+        title: 'Ideia',
+        image: {
+            source: ideaImageUrl,
+            alt: "Imagem de um lâmpada"
+        }
 
     },
     OTHER: {
-        title: 'Outro'
+        title: 'Outro',
+        image: {
+            source: thoughtImageUrl,
+            alt: "Imagem de um pensamento"
+        }
     }
 }
 
@@ -31,12 +45,29 @@ export function WidgetForm() {
 
                 <span className='text-xl leading-6'>Deixe seu feedback</span>
 
-                <CloseButton/>
+                <CloseButton />
             </header>
 
             <div className="flex py-8 gap-2 w-full"
             >
-                <button></button>
+                {/* destructiing array */}
+                {Object.entries(feedbackTypes).map(([key, value], index) => {
+
+                    console.log(key, value)
+                    return (
+                        <button
+                            key={index}
+                            className="bg-zinc-800 rounded-lg py-5 w-24 flex-1 flex flex-col items-center gap-2
+                             border-2 border-transparent hover:border-brand-500 focus:border-brand-500 focus:"
+                            // onClick={}
+                            type="button"
+
+                        >
+                            <img src={value.image.source} alt={value.image.alt} />
+                            <button>{value.title}</button>
+                        </button>
+                    )
+                })}
             </div>
 
             <footer className='text-xs text-neutral-400'>
