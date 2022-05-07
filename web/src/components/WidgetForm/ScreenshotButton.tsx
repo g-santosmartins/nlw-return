@@ -1,6 +1,7 @@
 import html2canvas from "html2canvas";
 import { Camera } from "phosphor-react";
 import { useState } from "react";
+import { Loading } from "../Loading";
 
 export function ScreenshotButton () { 
 
@@ -31,7 +32,9 @@ export function ScreenshotButton () {
         
     >
 
-        <Camera className="w-6 h-6 text-zinc-100"/>
+        {isTakingScreenshot ? <Loading/> : <Camera className="w-6 h-6 text-zinc-100"/>}
+
+       
     </button>
     )
 }
