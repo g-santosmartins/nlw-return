@@ -1,3 +1,12 @@
+
+/* using the tailwind extention */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* how to use normal classes with tailwind */
+
+.button {
+    @apply bg-violet-100 px-4 h-10 rounded;
+}
