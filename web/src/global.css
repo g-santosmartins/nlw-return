@@ -7,6 +7,10 @@
 
 /* how to use normal classes with tailwind */
 
-.button {
+/* .button {
     @apply bg-violet-100 px-4 h-10 rounded;
+} */
+
+body {
+    @apply bg-[#09090A] text-zinc-100;
 }
