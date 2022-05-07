@@ -46,6 +46,10 @@ export function WidgetForm() {
 
     const [feedbackType, setFeedbackType] = useState<FeedbackType | null>(null)
 
+    function handleRestartFeedback() {
+        setFeedbackType(null)
+    }
+
     return (
         // bringing position, and using cal() inside the tailwind css
         //w-[calc(100vw-2rem)] and with tablets md: wd:w-auto
@@ -59,7 +63,10 @@ export function WidgetForm() {
                     <FeedbackTypeStep onFeedbackTypeChanged={setFeedbackType} />
                     // feedback type component goes here
                 ) : (
-                    <FeedbackContentStep feedbackType={feedbackType} />
+                    <FeedbackContentStep 
+                    feedbackType={feedbackType} 
+                    onFeedbackRestartRequested={handleRestartFeedback}
+                    />
                 )
             }
 
