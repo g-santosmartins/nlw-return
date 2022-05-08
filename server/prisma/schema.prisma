@@ -1,0 +1,28 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// see SnowFlake from twitter
+
+// routine
+model Feedback {
+  // autoincrement isnt that cool, because of routes
+  id String @id @default(uuid()) //Universal Unique ID
+
+  //columns
+  type       String
+  comment    String
+  screenshot String
+
+  // table name
+
+  @@map("feedbacks")
+}
