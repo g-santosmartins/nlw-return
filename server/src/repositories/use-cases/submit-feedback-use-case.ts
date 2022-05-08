@@ -1,7 +1,6 @@
 import { MailAdapter } from "../../adapters/mail-adapter"
 import { FeedbacksRepository } from "../feedbacks-repository"
 
-
 // bis rule app layer
 interface SubmitFeedBackUseCaseRequest {
     type: string,
@@ -19,6 +18,19 @@ export class SubmitFeedbackUseCase {
 
     async execute(request: SubmitFeedBackUseCaseRequest) {
         const {type, comment, screenshot} = request
+        if(!type) {
+            throw new Error("Type is required.")
+
+        }
+
+        if(!comment) {
+            throw new Error("Comment is required.")
+
+        }
+
+        if(screenshot && !screenshot.startsWith("data:image/png;base64")) {
+            throw new Error("Invalid screenshot format.")
+        }
 
         await this.feedbacksRepository.create({
             type,
