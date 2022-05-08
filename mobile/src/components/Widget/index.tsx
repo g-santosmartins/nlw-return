@@ -1,13 +1,57 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React,{ useRef } from 'react';
+
+import { View, TouchableOpacity, Text } from 'react-native';
+
+import { ChatTeardropDots } from 'phosphor-react-native'
+
+import BottomSheet from '@gorhom/bottom-sheet'
+
+import { gestureHandlerRootHOC } from 'react-native-gesture-handler';
+
 
 import { styles } from './styles';
+import { theme } from '../../theme';
 
-export function Widget() {
+ function Widget() {
+
+  // to open without use a state
+  const bottomSheetRef = useRef<BottomSheet>(null)
+
+
+  // to open func
+
+  function handleOpen() {
+    bottomSheetRef.current?.expand()
+  }
+
+
   return (
-    <View style={styles.container}>
-      {/* <Text style={styles.text}>Hello World!</Text> */}
+    <>
+      <TouchableOpacity
+       style={styles.button}
+       onPress={handleOpen}
+       >
 
-    </View>
+        <ChatTeardropDots 
+          size={24}
+          weight="bold"
+          color={theme.colors.text_on_brand_color}
+        />
+
+        {/* <Text style={styles.text}>TouchableOpacity</Text> */}
+      </TouchableOpacity>
+
+
+      <BottomSheet
+        ref={bottomSheetRef}
+        snapPoints={[1, 280]}
+        backgroundStyle={styles.modal}
+        handleIndicatorStyle={styles.indicator}
+      >
+        
+      </BottomSheet>
+    </>
   );
 }
+
+export default gestureHandlerRootHOC(Widget)
