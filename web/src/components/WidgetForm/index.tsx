@@ -50,6 +50,7 @@ export function WidgetForm() {
 
     function handleRestartFeedback() {
         setFeedbackType(null)
+        setFeedbackSent(false)
     }
 
     return (
@@ -60,7 +61,7 @@ export function WidgetForm() {
           md:w-auto'>
               {/* if feedback is sent do */}
             {feebackSent ? (
-                <FeedbackSuccessStep />
+                <FeedbackSuccessStep onFeedRestartRequested={handleRestartFeedback} />
             ) : (
                 // if feedback isn't send do
                 <>
