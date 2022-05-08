@@ -12,13 +12,15 @@ import { ScreenshotButton } from "../ScreenshotButton";
 interface FeedbackContentStepProps {
     feedbackType: FeedbackType;
     onFeedbackRestartRequested: () => void;
+    onFeedbackSent: () => void
 }
 
 // fucntions
 
 export function FeedbackContentStep({
     feedbackType,
-    onFeedbackRestartRequested
+    onFeedbackRestartRequested,
+    onFeedbackSent
 }: FeedbackContentStepProps) {
 
     // states
@@ -78,7 +80,7 @@ export function FeedbackContentStep({
                         />
                     <button
                         disabled={comment.length === 0 }
-                        onClick={() => {}}
+                        onClick={() => onFeedbackSent()}
                         className="p-2 bg-brand-500 rounded-md border-transparent flex-1 flex
                          justify-center items-center text-sm hover:bg-brand-300 focus:outline-none
                          focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-900 focus:ring-brand-500
