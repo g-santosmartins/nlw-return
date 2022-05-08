@@ -20,7 +20,7 @@ model Feedback {
   //columns
   type       String
   comment    String
-  screenshot String
+  screenshot String?
 
   // table name
 
