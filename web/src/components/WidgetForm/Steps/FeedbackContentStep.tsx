@@ -1,19 +1,33 @@
+import { useState } from "react";
+
+
+// internal imports
 import { ArrowLeft, Camera } from "phosphor-react"
 import { FeedbackType, feedbackTypes } from ".."
 import { CloseButton } from "../../CloseButton"
 import { ScreenshotButton } from "../ScreenshotButton";
 
+
+// interfaces
 interface FeedbackContentStepProps {
     feedbackType: FeedbackType;
     onFeedbackRestartRequested: () => void;
 }
+
+// fucntions
+
 export function FeedbackContentStep({
     feedbackType,
     onFeedbackRestartRequested
 }: FeedbackContentStepProps) {
 
+    // states
+    const [screenshot, setScreenshot] = useState<string | null>(null)
+
     // only about the choosen option
     const feedbackTypeInfo = feedbackTypes[feedbackType]
+
+
     return (
         <>
             <header>
@@ -47,7 +61,11 @@ export function FeedbackContentStep({
 
                 <footer className="flex gap-2 mt-2">
 
-                    <ScreenshotButton/>
+                    <ScreenshotButton
+                    screenshot={screenshot}
+                    onScreenshotTook={setScreenshot}
+                    
+                        />
                     <button
                         onClick={() => {}}
                         className="p-2 bg-brand-500 rounded-md border-transparent flex-1 flex
