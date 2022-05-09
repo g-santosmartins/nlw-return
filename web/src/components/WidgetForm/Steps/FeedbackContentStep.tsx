@@ -6,6 +6,7 @@ import { ArrowLeft, Camera } from "phosphor-react"
 import { FeedbackType, feedbackTypes } from ".."
 import { CloseButton } from "../../CloseButton"
 import { ScreenshotButton } from "../ScreenshotButton";
+import { api } from "../../../lib/api";
 
 
 // interfaces
@@ -33,9 +34,12 @@ export function FeedbackContentStep({
     // functions
     function handleSubmitFeeback(event: FormEvent) {
         event.preventDefault()
-        console.log({
-            screenshot,
-            comment
+       
+        api.post('/feedbacks', {
+            type: feedbackType,
+            comment,
+            screenshot
+
         })
     }
 
